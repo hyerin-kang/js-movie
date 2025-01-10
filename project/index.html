@@ -16,7 +16,7 @@
     <header>
       <p>영화검색</p>
       <form action="#">
-        <input type="text" placeholder="영화를 검색하세요" />
+        <input id="searchInput" type="text" placeholder="영화를 검색하세요" />
       </form>
       <button>북마크 보기</button>
     </header>
@@ -25,6 +25,12 @@
         <!--영화목록들-->
         <!-- <li>영화들</li> -->
       </ul>
+    </div>
+    <div id="modal">
+      <div class="modal-content">
+        모달컨텐츠
+        <button class="close">닫기</button>
+      </div>
     </div>
     <footer><div class="container">footer</div></footer>
     <script src="./js/api.js"></script>
