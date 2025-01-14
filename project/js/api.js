@@ -1,7 +1,5 @@
 //공통ui(카드들)
 function renderMovies(movies) {
-  console.log(movies);
-
   let movieList = document.getElementById("movie-list");
   movieList.innerHTML = "";
 
@@ -14,7 +12,10 @@ function renderMovies(movies) {
 
     //ui생성
 
+    const liId = movie.id;
+
     let tempLi = document.createElement("li");
+    tempLi.id = liId;
     // <img src="${imageUrl}" alt="${movieTitle}" />
     tempLi.innerHTML = `
           <div class="img">
@@ -26,8 +27,56 @@ function renderMovies(movies) {
           </div>
       `;
     movieList.appendChild(tempLi);
+
+    //카드 클릭시 모달 열기
+    tempLi.addEventListener("click", () => {
+      console.log("모달 클릭");
+      openModal(movie);
+    });
   });
 }
+
+//모달 함수
+function openModal(movie) {
+  const modal = document.getElementById("modal");
+  modal.style.display = "block";
+  modal.innerHTML = "";
+  console.log("열림");
+
+  const imgURl = "https://image.tmdb.org/t/p/w500/";
+  const movieImg = movie.poster_path;
+  const modalTemp = document.createElement("div");
+  modalTemp.id = movie.id;
+  modalTemp.innerHTML = `
+      <div class="modal-content">
+        <div class="title">
+          <h1>${movie.title}</h1>
+          <button class="close">닫기</button>
+        </div>
+        <div class="content">
+          <div class="img">
+            <img src="${imgURl}${movieImg}" alt="${movie.title}" />
+          </div>
+          <div class="txt">
+            <p>${movie.overview}</p>
+            <button class='bookMark'>북마크 저장하기</button>
+          </div>
+        </div>
+      </div>
+    `;
+  modal.appendChild(modalTemp);
+
+  const closeBtn = document.querySelector(".close");
+  closeBtn.addEventListener("click", function (e) {
+    // alert(e.target);
+    modal.style.display = "none";
+    //새롭게 패치 하는 로직이 필요하다.
+    //
+  });
+}
+
+//모달 ui생성성
+//카드ui에 있는거랑같은정보가 보이게
 
 //인기영화 불러오기
 const options = {
@@ -52,6 +101,7 @@ fetch(
 
 //검색기능
 const input = document.querySelector("#searchInput");
+const inputForm = document.querySelector("#searchForm");
 input.addEventListener("input", function (e) {
   const inputVal = e.target.value.trim().toLowerCase();
   if (!inputVal) {
@@ -72,7 +122,7 @@ input.addEventListener("input", function (e) {
       .then((res) => res.json())
 
       .then((data) => {
-        renderMovies(data.results);
+        // renderMovies(data.results);
         console.log(data.results, "검색");
 
         // renderMovies(res);
@@ -81,7 +131,13 @@ input.addEventListener("input", function (e) {
         const includeVal = data.results.filter((movie) => {
           return movie.title.toLowerCase().includes(inputVal);
         });
-        renderMovies(includeVal); // ui 생성
+        if (includeVal.length == 0) {
+          console.log(includeVal, " 없음");
+          const movieList = document.getElementById("movie-list");
+          movieList.innerHTML = `<p>검색결과가 없습니다</p>`;
+        } else {
+          renderMovies(includeVal); // ui 생성
+        }
       })
       .catch((err) => console.error(err));
   }
@@ -110,22 +166,3 @@ input.addEventListener("input", function (e) {
       1. search
 
   */
-
-/*
-  모달 띄우기
-  
-  */
-
-let movieList = document.getElementById("movie-list");
-const modal = document.getElementById("modal");
-const closeBtn = document.querySelector(".close");
-movieList.addEventListener("click", function (e) {
-  // alert(e.target);
-  modal.style.display = "block";
-});
-closeBtn.addEventListener("click", function (e) {
-  // alert(e.target);
-  modal.style.display = "none";
-  //새롭게 패치 하는 로직이 필요하다.
-  //
-});

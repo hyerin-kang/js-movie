@@ -11,14 +11,18 @@
       href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Gothic&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@100..900&display=swap"
       rel="stylesheet"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Jersey+15&family=Nanum+Gothic&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
   </head>
   <body>
     <header>
-      <p>영화검색</p>
-      <form action="#">
+      <p class="logoTitle">RINFLIX</p>
+      <form action="#" id="searchForm">
         <input id="searchInput" type="text" placeholder="영화를 검색하세요" />
+        <button type="submit" class="submitBtn">검색버튼</button>
       </form>
-      <button>북마크 보기</button>
+      <button class="bookMark">북마크 보기</button>
     </header>
     <div class="container">
       <ul id="movie-list">
@@ -27,12 +31,23 @@
       </ul>
     </div>
     <div id="modal">
-      <div class="modal-content">
-        모달컨텐츠
-        <button class="close">닫기</button>
-      </div>
+      <!-- <div>
+        <div class="modal-content">
+          <div class="title">
+            <h1>영화 타이틀</h1>
+            <button class="close">닫기</button>
+          </div>
+          <div class="content">
+            <div class="img">
+              <img src="" alt="" />
+            </div>
+            <p>영화설명</p>
+          </div>
+        </div> -->
+      </div> 
     </div>
     <footer><div class="container">footer</div></footer>
-    <script src="./js/api.js"></script>
+    
   </body>
+  <script src="./js/api.js"></script>
 </html>
