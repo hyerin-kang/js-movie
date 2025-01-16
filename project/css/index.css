@@ -74,6 +74,12 @@ body {
 }
 
 /*****영화목록*****/
+.container .bookMarkTitle {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #383838;
+}
 #movie-list {
   display: flex;
   flex-wrap: wrap;
@@ -184,6 +190,7 @@ footer {
   border-radius: 10px;
   background: #fff;
   position: relative;
+  height: 80%;
 }
 #modal .modal-content .title {
   display: flex;
@@ -229,6 +236,7 @@ footer {
 #modal .modal-content .content {
   display: flex;
   gap: 10px;
+  height: calc(100% - 70px);
 }
 #modal .modal-content .content .img,
 #modal .modal-content .content .txt {
@@ -237,8 +245,54 @@ footer {
 
 #modal .modal-content .content .img img {
   display: block;
-  width: 100%;
+  width: auto;
+  height: 100%;
 }
-#modal .modal-content .bookMark {
-  background: red;
+#modal .modal-content .content .txt {
+}
+#modal .modal-content .bookMarBtn {
+  background: none;
+  display: block;
+  margin-top: 20px;
+  /* margin-left: auto; */
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+#modal .modal-content .bookMarBtn:hover {
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+@media (max-width: 1024px) {
+  #modal .modal-content {
+    width: 80%;
+    height: 80%;
+    overflow-y: scroll;
+  }
+  #modal .modal-content .content {
+    flex-direction: column;
+    height: 100%;
+  }
+  #modal .modal-content .bookMarBtn {
+    width: 100%;
+    margin: 30px auto;
+  }
+  #modal .modal-content .content .img img {
+    width: 100%;
+  }
+}
+.modal-content::-webkit-scrollbar {
+  width: 15px; /* 스크롤바 너비 */
+  height: 100%;
+  background: #fff;
+
+  border-radius: 0px 10px 10px 0px;
+}
+.modal-content::-webkit-scrollbar-thumb {
+  margin-top: 20px;
+  width: 100%;
+  background: #868686;
+  border-radius: 10px;
+  background-clip: padding-box;
+  border: 3px solid transparent;
 }
