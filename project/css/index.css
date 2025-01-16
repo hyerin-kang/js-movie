@@ -153,14 +153,14 @@ footer {
   }
 }
 @media (max-width: 768px) {
-  #movie-list li > div.img {
-    height: 490px;
-  }
   #movie-list li {
     flex: 0 0 calc(100% / 2 - 20px);
   }
 }
 @media (max-width: 500px) {
+  #movie-list {
+    width: 100%;
+  }
   #movie-list li {
     width: 100%;
     flex: auto;
