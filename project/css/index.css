@@ -46,7 +46,7 @@ header form button {
   font-size: 0;
   width: 25px;
   height: 25px;
-  background: transparent url(../image/ico-search.png) center no-repeat;
+  background: transparent url(./../image/ico-search.png) center no-repeat;
   background-size: cover;
   border: none;
   position: absolute;
