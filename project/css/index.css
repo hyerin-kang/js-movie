@@ -34,6 +34,10 @@ header .logoTitle {
   font-weight: 400;
   font-style: normal;
 }
+
+header p:hover {
+  cursor: pointer;
+}
 /*****검색창*****/
 header form {
   margin: 20px auto;
@@ -138,6 +142,22 @@ body {
 footer {
   margin: 0;
   margin-top: 30px;
+}
+footer a.logo {
+  font-size: 50px;
+  font-family: "Jersey 15", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+footer a {
+  text-decoration: none;
+  color: #ccc;
+}
+footer {
+  color: #ccc;
+}
+footer p:last-child {
+  opacity: 50%;
 }
 
 /*****반응형*****/
@@ -248,9 +268,7 @@ footer {
   width: auto;
   height: 100%;
 }
-#modal .modal-content .content .txt {
-}
-#modal .modal-content .bookMarBtn {
+#modal .modal-content .saveBookMarkBtn {
   background: none;
   display: block;
   margin-top: 20px;
@@ -258,7 +276,7 @@ footer {
   padding: 5px 10px;
   border-radius: 5px;
 }
-#modal .modal-content .bookMarBtn:hover {
+#modal .modal-content .saveBookMarkBtn:hover {
   background: #000;
   color: #fff;
   cursor: pointer;
@@ -271,9 +289,9 @@ footer {
   }
   #modal .modal-content .content {
     flex-direction: column;
-    height: 100%;
+    height: fit-content;
   }
-  #modal .modal-content .bookMarBtn {
+  #modal .modal-content .saveBookMarkBtn {
     width: 100%;
     margin: 30px auto;
   }

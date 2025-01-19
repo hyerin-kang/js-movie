@@ -61,7 +61,7 @@ function openModal(movie_2) {
           </div>
           <div class="txt">
             <p>${movie_2.overview}</p>
-            <button class='bookMarBtn'>북마크 저장하기</button>
+            <button class='saveBookMarkBtn'>북마크 저장하기</button>
           </div>
         </div>
       </div>
@@ -73,9 +73,10 @@ function openModal(movie_2) {
     modal.style.display = "none";
   });
   //북마크 저장
-  document.querySelector(".bookMarBtn").addEventListener("click", function (e) {
-    alert("북마크 저장");
+  const saveBookMarkBtn = document.querySelector(".saveBookMarkBtn");
+  let cancelBookMark = false;
 
+  saveBookMarkBtn.addEventListener("click", function (e) {
     const localStorageBookMarkList = localStorage.getItem("bookMarkList"); //bookMarkList 키값으로 저장된 value 값들을 가져와
     // localStorage.setItem("bookMarkList", JSON.stringify(movie)); //movie값을 bookMarkList키 값으로 저장해라
 
@@ -87,24 +88,42 @@ function openModal(movie_2) {
     } else {
       // 저장해둔게 있으면 아까 문자열로 바꾼것들을 객체로 변환하여 bookMarkList 에 할당한다.
       bookMarkList = JSON.parse(localStorageBookMarkList);
-      // console.log(bookMarkList);
     }
 
     //중복된거  추가안되게 짜라
-    console.log(movie_2, "선택한거");
+    // console.log(movie_2.id, "선택한거");
+    const saveId = JSON.parse(localStorage.getItem("bookMarkList") || "[]").map(
+      (movie) => movie.id
+    );
+    // console.log(saveId, "저장된id");
 
-    bookMarkList.push(movie_2);
+    console.log(cancelBookMark); //처음에는 false임
+    if (!cancelBookMark) {
+      //true일때
+      alert("북마크 추가 되었습니다.");
+      bookMarkList.push(movie_2);
+      saveBookMarkBtn.innerHTML = `북마크 해지하기`;
+    } else {
+      //false 일때
+      alert("북마크 취소 되었습니다!");
+      saveBookMarkBtn.innerHTML = `북마크 추가하기`;
+      // bookMarkList.push(movie_2); 해당한게 배열에 있으면 빼라
+      bookMarkList.filter((movie) => movie !== movie_2);
+    }
+    cancelBookMark = !cancelBookMark;
+
     localStorage.setItem("bookMarkList", JSON.stringify(bookMarkList));
   });
 }
 
 //북마크 된 목록 보여주기
 let isBookMark = false; //처음 보여지는 화면이 인기영화이니까 북마크된거를 false로 초기설정
+
+const bookMarkBtn = document.querySelector(".bookMark");
+
 function showBookmarkAndPopular(movies_1) {
   // console.log("저장된 북마크들 보여주기");
   const localStorageBookMarkList = localStorage.getItem("bookMarkList");
-  const bookMarkBtn = document.querySelector(".bookMark");
-
   if (isBookMark) {
     // 인기 영화가 보일때
     bookMarkBtn.innerHTML = "북마크 보기";
@@ -117,6 +136,7 @@ function showBookmarkAndPopular(movies_1) {
         "<p>북마크된 영화가 없습니다 :(</p>";
     } else {
       renderMovies(JSON.parse(localStorageBookMarkList)); //찜한영화 보여주기
+      //
     }
   }
   isBookMark = !isBookMark; //클릭할때마다 true, false로 바꾸기 (토글)
@@ -171,4 +191,11 @@ input.addEventListener("keyup", function (e) {
       })
       .catch((err) => console.error(err));
   }
+});
+
+//로고 새로고침
+const logoTitle = document.querySelector(".logoTitle");
+console.log(logoTitle);
+logoTitle.addEventListener("click", function () {
+  location.reload();
 });
